@@ -1,0 +1,71 @@
+*JOINS: 
+inner join: 
+- intersection b/w 2 tables and return matching records
+
+left join: 
+
+- keep all rows from LHS (base) and return any matching records from RHS 
+- if no match b/w LHS and RHS, then null values returned for RHS
+
+full join: 
+
+- rows preserved from both tables
+- nulls for values where either LHS doesn't match RHS and vice versa
+
+cross join: 
+
+- full combo of all rows in both tables joined
+- known as cartesian join since cartesian product of 2 sets returned
+- syntax: CROSS JOIN or FROM t1, t2
+
+left semi join: 
+
+- regular left join with a DISTINCT followed by a WHERE filter to remove all null values from joint dataset
+- in postgres, use WHERE EXISTS 
+- e.g. SELECT names.iid, names.first_name FROM name WHERE EXISTS (SELECT iid FROM new_jobs WHERE names.iid = new_jobs.iid);
+
+anti join: 
+
+- only LHS records which don't appear on RHS returned
+- opposite of left semi join
+- in postgres: use WHERE NOT EXISTS
+- e.g. SELECT names.iid, names.first_name FROM names WHERE NOT EXISTS (SELECT 1 FROM new_jobs WHERE names.iid = new_jobs.iid);
+
+
+*SET OPERATIONS: 
+union
+
+- union b/w two SELECT results
+- built in DISTINCT on final output
+- SELECT * FROM names where first_name = 'Danny' UNION SELECT * FROM names where first_name = 'Kate';
+- columns and data types must align
+
+union all
+
+- exactly like UNION, but no running of DISTINCT on final output
+
+intersect
+
+- only records in which both records exist b/w two SELECT results
+
+except 
+
+- so only LEFT SELECT records which don't appear on RIGHT SELECT returned
+- equivalent of ANTI JOIN but in set notation
+- built in DISTINCT on final output
+
+multi combinations of set operations: 
+- executed from top to bottom 
+- 
+
+
+
+
+
+
+
+
+
+
+
+
